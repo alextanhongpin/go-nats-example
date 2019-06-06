@@ -1,16 +1,16 @@
 version: '3.7' 
 services:
   nats-main:
-    image: nats:1.4.0 
+    image: nats:1.4.1-linux
     ports:
       - 4222:4222
       - 6222:6222
       - 8222:8222
-  streaming:
-    image: nats-streaming:0.11.2
+  nats-streaming:
+    image: nats-streaming:0.14.3
     ports:
-      - 4223:4223
-      - 8223:8223
-    command: -store file -dir datastore -ns nats://nats-main:4222
+            - 127.0.0.1:4223:4223
+            - 127.0.0.1:8223:8223
+    command: -p 4223 -m 8223 -store file -dir datastore -ns nats://nats-main:4222
     links:
       - nats-main
