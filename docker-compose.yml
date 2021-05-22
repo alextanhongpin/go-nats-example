@@ -1,16 +1,16 @@
-version: '3.7' 
+version: '3.8'
 services:
   nats-main:
-    image: nats:1.4.1-linux
+    image: nats:2.2.5-scratch
     ports:
-      - 4222:4222
-      - 6222:6222
-      - 8222:8222
+      - 127.0.0.1:4222:4222 # Clients
+      - 127.0.0.1:6222:6222 # HTTP management port for information reporting.
+      - 127.0.0.1:8222:8222 # Routing port for clustering.
   nats-streaming:
-    image: nats-streaming:0.14.3
+    image: nats-streaming:0.21.2-alpine3.13
     ports:
-            - 127.0.0.1:4223:4223
-            - 127.0.0.1:8223:8223
+      - 127.0.0.1:4223:4223 # Clients.
+      - 127.0.0.1:8223:8223 # HTTP management port for information reporting.
     command: -p 4223 -m 8223 -store file -dir datastore -ns nats://nats-main:4222
     links:
       - nats-main
