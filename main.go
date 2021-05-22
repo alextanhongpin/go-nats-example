@@ -34,6 +34,19 @@ func main() {
 
 	time.Sleep(2 * time.Second)
 	sub, err := c.Subscribe("foo", nil)
+
+	// Unsubscribe.
 	sub.Unsubscribe()
+
+	// Drain.
+	sub.Drain()
+
 	time.Sleep(2 * time.Second)
+
+	// Drain connection (Preferred for responders)
+	// Close() not needed if this is called.
+	nc.Drain()
+
+	// Close connection.
+	nc.Close()
 }

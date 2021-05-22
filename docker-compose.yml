@@ -6,6 +6,7 @@ services:
       - 127.0.0.1:4222:4222 # Clients
       - 127.0.0.1:6222:6222 # HTTP management port for information reporting.
       - 127.0.0.1:8222:8222 # Routing port for clustering.
+    command: -js
   nats-streaming:
     image: nats-streaming:0.21.2-alpine3.13
     ports:
