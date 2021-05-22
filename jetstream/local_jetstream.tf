@@ -1,5 +1,5 @@
 # Reference:
-# https://github.com/nats-io/jerraform-provider-jetstream
+# https://github.com/nats-io/terraform-provider-jetstream
 
 
 #https://www.terraform.io/docs/language/providers/requirements.html#source-addresses
@@ -28,6 +28,6 @@ resource "jetstream_consumer" "ORDERS_NEW" {
   stream_id      = jetstream_stream.ORDERS.id
   durable_name   = "NEW"
   deliver_all    = true
-  filter_subject = "ORDERS.received"
+  filter_subject = "ORDERS.scratch"
   sample_freq    = 100
 }
