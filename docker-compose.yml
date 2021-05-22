@@ -7,6 +7,8 @@ services:
       - 127.0.0.1:6222:6222 # HTTP management port for information reporting.
       - 127.0.0.1:8222:8222 # Routing port for clustering.
     command: -js
+    networks:
+      - nats
   nats-streaming:
     image: nats-streaming:0.21.2-alpine3.13
     ports:
@@ -15,3 +17,9 @@ services:
     command: -p 4223 -m 8223 -store file -dir datastore -ns nats://nats-main:4222
     links:
       - nats-main
+    networks:
+      - nats
+
+networks:
+  nats:
+    name: nats
